@@ -3,22 +3,23 @@
 {% block title %}Page Accueil{% endblock %}
 
 {% block body %}
-    <h1 class="mb-5">Homepage</h1>
-    <div style="display:flex; gap: 20px;">
-    {% for annonce in annonces %}
-        <div class="card" style="width: 18rem;">
-            <img src="{{ vich_uploader_asset(annonce, 'imageFile') }}" class="card-img-top" />
-            <div class="card-body">
-                <h5 class="card-title">{{annonce.title}}</h5>
-                <p class="card-text">{{annonce.price}} €</p>
-                <p class="card-text">{{annonce.description}}</p>
-                <p>Catégorie: {{annonce.category.title}}</p>
-                <a href="#" class="btn btn-primary">Go Somewhere</a>
+    <h1 class="mb-5">Accueil</h1>
+            <div class="row" style="justify-content: space-between">
+        {% for annonce in annonces %}
+                <div class="card" style="width: 30%; margin-bottom: 20px">
+                    <img src="{{ vich_uploader_asset(annonce, 'imageFile') }}" class="card-img-top"/>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ annonce.title }}</h5>
+                        <p class="card-text">{{ annonce.price }} €</p>
+                        <p class="card-text">{{ annonce.description }}</p>
+                        <p>Catégorie: {{ annonce.category.title }}</p>
+                        <a href="{{ path('annonce_single', {id: annonce.id}) }}" class="btn btn-primary">Voir article</a>
+                    </div>
+                    <div class="card-footer">
+                        <p>{{ annonce.createdAt|date("d/m/Y à h:m:s") }}</p>
+                    </div>
+                </div>
+        {% endfor %}
             </div>
-            <div class="card-footer">
-                <p>{{annonce.createdAt|date("d/m/Y à h:m:s")}}</p>
-            </div>
-        </div>    
-    {% endfor %}
-    </div>
+        </div>
 {% endblock %}

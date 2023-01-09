@@ -46,8 +46,11 @@ class AnnonceRepository extends ServiceEntityRepository
         $query = $entityManager->createQuery(
             'SELECT a, c
             FROM App\Entity\Annonce a
-            INNER JOIN a.category c'
+            INNER JOIN a.category c
+            ORDER BY a.id DESC
+            '
         );
+        $query->setMaxResults(12);
 
         return $query->getResult();
     }

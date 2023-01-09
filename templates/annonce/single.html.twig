@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <div class="card p-5">
+        <div>
+            <img src="{{ vich_uploader_asset(annonce, 'imageFile') }}" class="card-img-top"/>
+        </div>
+        <div>
+            <h1>{{ annonce.title }}</h1>
+            <p>{{ annonce.price }} €</p>
+            <p>{{ annonce.description }}</p>
+            <p>{{ annonce.category.title }}</p>
+            <p>Proposé par {{ annonce.user.username }} le {{ annonce.createdAt|date("d/m/Y") }}</p>
+        </div>
+    </div>
+
+    {% if app.user %}
+        <div class="card">
+            <div>Actions</div>
+            <div>
+                <a href="{{ path('annonce_edit', {id: annonce.id}) }}">
+                    <button>Modifier</button>
+                </a>
+                <a href="{{ path('annonce_delete', {id: annonce.id}) }}">
+                    <button>Supprimer</button>
+                </a>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
